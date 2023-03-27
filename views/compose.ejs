@@ -1,0 +1,35 @@
+<%- include("partials/header"); -%>
+<h1>Create a New Ticket:</h1>
+/* in order to pass value over to server app.js where we can log it, have to include inside html form */
+<form class="" action="/compose" method="post">
+  <div class="form-group">
+    <label>Title:</label>
+    <input class="form-control" type="text" name="ticketTitle">
+    <label>Description:</label>
+    <textarea class="form-control" name="ticketBody" rows="3" cols="30" maxlength="100"></textarea>
+    <label>Project:</label>
+    <select class="form-control" name="project" value="-- select a project --">
+      <option selected disabled>Choose a project...</option>
+      <% savedProjects.forEach(function(project) { %>
+          <option><%= project.title %></option>
+        <% }); %>
+    </select>
+    <label>Assign to:</label>
+    <select class="form-control" name="assignedTo">
+      <option selected disabled>Choose a user...</option>
+      <% savedUsers.forEach(function(user) { %>
+          <option><%= user.username %></option>
+        <% }); %>
+    </select>
+    <label>Type:</label>
+    <select class="form-control" name="ticketUrgency">
+      <option selected disabled>Choose a type...</option>
+      <option value="major">major</option>
+      <option value="medium">medium</option>
+      <option value="minor">minor</option>
+    </select>
+  </div>
+  <button class="btn btn-primary" type="submit" name="button">Publish</button>
+</form>
+
+<%- include("partials/footer"); -%>
